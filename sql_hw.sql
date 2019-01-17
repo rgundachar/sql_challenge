@@ -149,17 +149,17 @@ JOIN sakila.payment p ON (r.rental_id=p.rental_id)
 GROUP BY c.name ORDER BY Gross  LIMIT 5;
 
 -- * 8a. In your new role as an executive, you would like to have an easy way of viewing the Top five genres by gross revenue. Use the solution from the problem above to create a view. If you haven't solved 7h, you can substitute another query to create a view.
-create view top_five_generes as 
+create sakila.view top_five_generes as 
 SELECT c.name AS "Top Five", SUM(p.amount) AS "Gross" 
-FROM category c
-JOIN film_category fc ON (c.category_id=fc.category_id)
-JOIN inventory i ON (fc.film_id=i.film_id)
-JOIN rental r ON (i.inventory_id=r.inventory_id)
-JOIN payment p ON (r.rental_id=p.rental_id)
+FROM sakila.category c
+JOIN sakila.film_category fc ON (c.category_id=fc.category_id)
+JOIN sakila.inventory i ON (fc.film_id=i.film_id)
+JOIN sakila.rental r ON (i.inventory_id=r.inventory_id)
+JOIN sakila.payment p ON (r.rental_id=p.rental_id)
 GROUP BY c.name ORDER BY Gross  LIMIT 5;
 
 
 -- * 8b. How would you display the view that you created in 8a?
-select * from top_five_generes;
+select * from sakila.top_five_generes;
 -- * 8c. You find that you no longer need the view `top_five_genres`. Write a query to delete it.
-drop view top_five_generes;
+drop view sakila.top_five_generes;
